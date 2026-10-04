@@ -112,9 +112,11 @@ export function ProductShowcase() {
       </div>
 
       {/* App window */}
-      <div className="relative">
-        <div aria-hidden="true" className="absolute -bottom-4 -right-4 h-2/3 w-2/3 bg-orange" />
-        <AppWindow view={active} />
+      <div>
+        <div className="relative">
+          <div aria-hidden="true" className="absolute -bottom-4 -right-4 h-2/3 w-2/3 bg-orange" />
+          <AppWindow view={active} />
+        </div>
         <p className="mt-7 font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
           Illustration with sample data
         </p>

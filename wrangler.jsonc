@@ -1,0 +1,32 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "bloomlto",
+	"compatibility_date": "2026-10-01",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			// Self-reference service binding, the service name must match the worker name
+			// see https://opennext.js.org/cloudflare/caching
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "bloomlto"
+		}
+	],
+	"images": {
+		// Enable image optimization for next/image
+		// see https://opennext.js.org/cloudflare/howtos/image
+		"binding": "IMAGES"
+	},
+	"routes": [
+		// The bloomlto.com zone must be on this Cloudflare account
+		{ "pattern": "bloomlto.com", "custom_domain": true },
+		{ "pattern": "www.bloomlto.com", "custom_domain": true }
+	],
+	"observability": {
+		"enabled": true
+	}
+}

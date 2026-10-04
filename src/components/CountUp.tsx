@@ -23,7 +23,7 @@ export function CountUp({ value, duration = 1200 }: { value: string; duration?: 
 
           const start = performance.now();
           const tick = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
+            const progress = Math.min(Math.max((now - start) / duration, 0), 1);
             const eased = 1 - Math.pow(1 - progress, 3);
             setDisplay(String(Math.round(target * eased)));
             if (progress < 1) requestAnimationFrame(tick);

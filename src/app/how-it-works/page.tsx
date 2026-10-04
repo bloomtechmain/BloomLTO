@@ -140,7 +140,7 @@ export default function HowItWorksPage() {
                 key={step.title}
                 as="li"
                 delay={i * 70}
-                className="group flex items-start gap-5 border-t border-grey/15 py-8 sm:gap-8"
+                className="group flex flex-wrap items-center gap-x-5 gap-y-4 border-t border-grey/15 py-8 sm:flex-nowrap sm:items-start sm:gap-8"
               >
                 <span
                   aria-hidden="true"
@@ -151,7 +151,7 @@ export default function HowItWorksPage() {
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-grey text-white transition-colors duration-300 group-hover:bg-orange">
                   {step.icon}
                 </span>
-                <div>
+                <div className="w-full sm:w-auto">
                   <h2 className="font-heading text-2xl font-bold text-grey">{step.title}</h2>
                   <p className="mt-2 max-w-xl text-ink/75">{step.body}</p>
                 </div>

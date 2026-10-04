@@ -29,13 +29,13 @@ function Connector({ on }: { on: boolean }) {
   return (
     <div
       aria-hidden="true"
-      className={`flex shrink-0 flex-col items-center self-center transition-colors duration-500 lg:w-12 lg:flex-row xl:w-20 ${
+      className={`flex shrink-0 flex-col items-center self-center transition-colors duration-500 xl:w-14 xl:flex-row 2xl:w-20 ${
         on ? "text-orange" : "text-grey/25"
       }`}
     >
-      <span className={`flow-dash-y h-10 w-0.5 lg:hidden ${on ? "flow-run" : ""}`} />
-      <span className={`flow-dash-x hidden h-0.5 flex-1 lg:block ${on ? "flow-run" : ""}`} />
-      <svg viewBox="0 0 12 12" className="h-3 w-3 shrink-0 rotate-90 lg:rotate-0" fill="currentColor">
+      <span className={`flow-dash-y h-10 w-0.5 xl:hidden ${on ? "flow-run" : ""}`} />
+      <span className={`flow-dash-x hidden h-0.5 flex-1 xl:block ${on ? "flow-run" : ""}`} />
+      <svg viewBox="0 0 12 12" className="h-3 w-3 shrink-0 rotate-90 xl:rotate-0" fill="currentColor">
         <path d="M2 1 L11 6 L2 11 Z" />
       </svg>
     </div>
@@ -141,7 +141,7 @@ export function ProblemSection() {
 
         {/* Flow chart: a restore request without a catalog */}
         <div
-          className="mt-20 flex flex-col items-stretch gap-3 lg:mt-24 lg:flex-row lg:gap-2"
+          className="mx-auto mt-20 flex max-w-2xl flex-col items-stretch gap-3 lg:mt-24 xl:max-w-none xl:flex-row xl:gap-2"
           onMouseEnter={() => (pausedRef.current = true)}
           onMouseLeave={() => (pausedRef.current = false)}
         >
@@ -164,7 +164,7 @@ export function ProblemSection() {
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
                   aria-pressed={on}
-                  className={`relative mt-5 flex-1 basis-0 border-2 px-6 pb-6 pt-10 text-left transition-all duration-500 lg:mt-0 ${
+                  className={`relative mt-5 flex-1 basis-0 border-2 px-6 pb-6 pt-10 text-left transition-all duration-500 xl:mt-0 ${
                     on
                       ? "border-orange bg-cream shadow-[8px_8px_0_0_var(--color-orange)]"
                       : passed

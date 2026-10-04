@@ -121,14 +121,14 @@ export default function PricingPage() {
                   <span className="h-px w-8 bg-orange" />
                   One time
                 </p>
-                <div className="mt-10 grid grid-cols-3 border-t border-white/15 pt-6">
+                <div className="mt-10 grid grid-cols-[auto_auto_1fr] border-t border-white/15 pt-6">
                   {[
                     ["1", "Server"],
                     ["3 yrs", "Updates"],
                     ["LTO-5–9", "Supported"],
                   ].map(([value, label], i) => (
-                    <div key={label} className={i > 0 ? "border-l border-white/15 pl-4" : "pr-4"}>
-                      <p className="whitespace-nowrap font-heading text-xl font-black text-white sm:text-2xl">
+                    <div key={label} className={i > 0 ? "border-l border-white/15 pl-3 sm:pl-4" : "pr-3 sm:pr-4"}>
+                      <p className="whitespace-nowrap font-heading text-base font-black text-white sm:text-xl xl:text-2xl">
                         {value}
                       </p>
                       <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-white/50">

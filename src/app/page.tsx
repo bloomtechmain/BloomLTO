@@ -385,7 +385,7 @@ export default function HomePage() {
                   className="-z-10 object-cover grayscale"
                 />
                 <div className="absolute inset-0 -z-10 bg-gradient-to-t from-grey-deep via-grey-deep/80 to-grey-deep/30" />
-                <QuarterCircle className="left-0 top-0 -z-10 h-24 w-24 text-orange" />
+                <QuarterCircle className="right-0 top-0 -z-10 h-20 w-20 -scale-x-100 text-orange sm:h-24 sm:w-24" />
                 <Kicker dark>Book a demo</Kicker>
                 <h2 className="font-heading text-3xl font-extrabold text-white sm:text-4xl">
                   See BloomLTO on your own library.

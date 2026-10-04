@@ -19,15 +19,15 @@ function Link({ label, on }: { label: string; on: boolean }) {
   return (
     <div
       aria-hidden="true"
-      className={`ml-[39px] flex shrink-0 flex-col items-start transition-colors duration-500 lg:ml-0 lg:mt-[30px] lg:w-24 lg:items-center xl:w-36 ${
+      className={`ml-[39px] flex shrink-0 flex-col items-start transition-colors duration-500 xl:ml-0 xl:mt-[30px] xl:w-28 xl:items-center 2xl:w-36 ${
         on ? "text-orange" : "text-white/25"
       }`}
     >
-      <span className="hidden font-mono text-[10px] font-bold uppercase tracking-[0.18em] lg:block">
+      <span className="hidden font-mono text-[10px] font-bold uppercase tracking-[0.18em] xl:block">
         {label}
       </span>
-      <span className={`flow-dash-y h-10 w-0.5 lg:hidden ${on ? "flow-run" : ""}`} />
-      <span className="relative mt-1.5 hidden w-full items-center lg:flex">
+      <span className={`flow-dash-y h-10 w-0.5 xl:hidden ${on ? "flow-run" : ""}`} />
+      <span className="relative mt-1.5 hidden w-full items-center xl:flex">
         <span className={`flow-dash-x h-0.5 flex-1 ${on ? "flow-run" : ""}`} />
         <svg viewBox="0 0 12 12" className="h-3 w-3 shrink-0" fill="currentColor">
           <path d="M2 1 L11 6 L2 11 Z" />
@@ -57,7 +57,7 @@ export function HowItWorksFlow({ steps }: { steps: FlowStep[] }) {
 
   return (
     <ol
-      className="flex flex-col gap-2 lg:flex-row lg:items-start lg:gap-3"
+      className="flex flex-col gap-2 xl:flex-row xl:items-start xl:gap-3"
       onMouseEnter={() => (pausedRef.current = true)}
       onMouseLeave={() => (pausedRef.current = false)}
     >
@@ -73,7 +73,7 @@ export function HowItWorksFlow({ steps }: { steps: FlowStep[] }) {
               onFocus={() => setActive(i)}
               onClick={() => setActive(i)}
               aria-pressed={on}
-              className="group flex flex-1 basis-0 items-start gap-5 text-left lg:block"
+              className="group flex flex-1 basis-0 items-start gap-5 text-left xl:block"
             >
               <span
                 className={`flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500 ${
@@ -86,7 +86,7 @@ export function HowItWorksFlow({ steps }: { steps: FlowStep[] }) {
               >
                 <Icon className="h-9 w-9" />
               </span>
-              <span className="block lg:mt-7">
+              <span className="block xl:mt-7">
                 <span
                   className={`block font-heading text-5xl font-black leading-none transition-colors duration-500 sm:text-6xl ${
                     on
@@ -117,9 +117,9 @@ export function HowItWorksFlow({ steps }: { steps: FlowStep[] }) {
         );
       })}
 
-      <li className="flex shrink-0 items-center gap-5 lg:block lg:text-center">
+      <li className="flex shrink-0 items-center gap-5 xl:block xl:text-center">
         <span
-          className={`flex h-20 w-20 items-center justify-center border-2 transition-all duration-500 lg:mx-auto ${
+          className={`flex h-20 w-20 items-center justify-center border-2 transition-all duration-500 xl:mx-auto ${
             active === last
               ? "border-white bg-white text-orange-deep"
               : "border-white/30 bg-grey-deep/60 text-white/50"
@@ -127,7 +127,7 @@ export function HowItWorksFlow({ steps }: { steps: FlowStep[] }) {
         >
           <CheckIcon className="h-9 w-9" />
         </span>
-        <span className="block lg:mt-7">
+        <span className="block xl:mt-7">
           <span className="block font-heading text-lg font-bold text-white">File restored</span>
           <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
             Any destination
