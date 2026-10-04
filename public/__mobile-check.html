@@ -1,0 +1,74 @@
+<!doctype html>
+<meta charset="utf-8" />
+<body style="margin:0;background:#f0f">
+<pre id="out"></pre>
+<script>
+  // Temporary harness: loads a page in a phone-width iframe and reports overflow.
+  const q = new URLSearchParams(location.search);
+  const w = Number(q.get("w") || 390);
+  const h = Number(q.get("h") || 844);
+  const pages = (q.get("p") || "/").split(",");
+  const shot = q.get("shot");
+  const out = document.getElementById("out");
+  if (shot) out.remove();
+
+  function load(path) {
+    return new Promise((resolve) => {
+      const f = document.createElement("iframe");
+      f.style.cssText = `display:block;border:0;width:${w}px;height:${h}px`;
+      f.src = path;
+      f.onload = () => setTimeout(() => resolve(f), 2500);
+      document.body.appendChild(f);
+    });
+  }
+
+  (async () => {
+    for (const path of pages) {
+      const f = await load(path);
+      const d = f.contentDocument;
+      const root = d.documentElement;
+      if (shot) {
+        // Scroll a real phone-sized viewport so scroll-triggered content behaves as on a device.
+        const y = Number(q.get("y") || 0);
+        const click = q.get("click");
+        if (click) d.querySelector(click).click();
+        f.contentWindow.scrollTo({ top: y, behavior: "instant" });
+        continue;
+      }
+      const lines = [`${path} @${w}: scrollWidth=${root.scrollWidth} clientWidth=${root.clientWidth} height=${root.scrollHeight}`];
+      // Elements wider than the viewport that are not clipped by an ancestor.
+      const clipped = (el) => {
+        for (let p = el.parentElement; p && p !== d.body; p = p.parentElement) {
+          const o = getComputedStyle(p).overflowX;
+          if (o === "hidden" || o === "clip" || o === "auto" || o === "scroll") {
+            const r = p.getBoundingClientRect();
+            if (r.right <= w + 1 && r.left >= -1) return true;
+          }
+        }
+        return false;
+      };
+      let n = 0;
+      for (const el of d.body.querySelectorAll("*")) {
+        const r = el.getBoundingClientRect();
+        if (r.width === 0 || r.height === 0) continue;
+        if ((r.right > w + 1 || r.left < -1) && !clipped(el)) {
+          if (n++ < 8) lines.push(`  OVERFLOW <${el.tagName.toLowerCase()}> L${Math.round(r.left)} R${Math.round(r.right)} ${String(el.className).slice(0, 90)}`);
+        }
+      }
+      // Text that is cut off inside its own box.
+      let c = 0;
+      for (const el of d.body.querySelectorAll("p,span,h1,h2,h3,a,button,li,dt,dd")) {
+        const cs = getComputedStyle(el);
+        if (cs.display === "inline") continue;
+        if (el.scrollWidth > el.clientWidth + 1 && cs.overflowX === "visible" && el.clientWidth > 0) {
+          if (c++ < 8) lines.push(`  TEXT-SPILL <${el.tagName.toLowerCase()}> sw=${el.scrollWidth} cw=${el.clientWidth} "${el.textContent.trim().slice(0, 50)}"`);
+        }
+      }
+      lines.push(`  overflow elements: ${n}, text spills: ${c}`);
+      out.textContent += lines.join("\n") + "\n";
+      f.remove();
+    }
+    document.title = "done";
+  })();
+</script>
+</body>
